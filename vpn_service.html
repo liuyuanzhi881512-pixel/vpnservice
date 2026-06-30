@@ -483,17 +483,18 @@
 
         const resp = await fetch(SCF_FUNCTION_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'X-Webhook-Key': WEBHOOK_KEY },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(message)
         });
 
-        if (resp.ok) {
+        const result = await resp.json();
+        if (result.errcode === 0) {
           showToast('✅ 提交成功！专员会尽快联系您');
           document.getElementById('applyForm').reset();
           selectedQuestion = null;
           document.querySelectorAll('.scene-card').forEach(c => c.classList.remove('selected'));
         } else {
-          throw new Error('HTTP ' + resp.status);
+          showToast('提交失败：' + (result.errmsg || '未知错误'));
         }
       } catch (err) {
         console.error(err);
