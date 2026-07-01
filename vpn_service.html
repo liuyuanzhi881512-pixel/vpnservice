@@ -20,14 +20,13 @@
       min-height: 100dvh;
       color: #333;
       overscroll-behavior: none;
-      padding-bottom: env(safe-area-inset-bottom);
     }
 
     /* ===== Hero 标题区 ===== */
     .hero {
       background: linear-gradient(145deg, #2D303B 0%, #3A3D4A 50%, #2D303B 100%);
       margin: 16px 16px 0;
-      padding: 40px 24px 36px;
+      padding: 32px 20px 28px;
       border-radius: 18px;
       position: relative;
       overflow: hidden;
@@ -63,13 +62,11 @@
     }
 
     .hero-title {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 700;
-      letter-spacing: 3px;
-      line-height: 1.4;
-      background: linear-gradient(135deg, #D4A84C, #F0D68C);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      letter-spacing: 1.5px;
+      line-height: 1.5;
+      color: #D4A84C;
       position: relative;
       z-index: 1;
     }
@@ -77,7 +74,7 @@
     .hero-subtitle {
       font-size: 14px;
       color: rgba(212,168,76,0.65);
-      margin-top: 12px;
+      margin-top: 8px;
       font-weight: 400;
       letter-spacing: 0.5px;
       line-height: 1.6;
@@ -85,51 +82,58 @@
       z-index: 1;
     }
 
-    /* ===== 分类标题 ===== */
-    .section-label {
+    /* ===== 提示条 ===== */
+    .hint-bar {
       text-align: center;
-      padding: 20px 16px 4px;
-      font-size: 14px;
-      color: #999;
-      letter-spacing: 2px;
+      padding: 12px 16px;
+      margin: 10px 16px 4px;
+      font-size: 13px;
+      color: #A09080;
+      letter-spacing: 0.3px;
     }
-    .section-label span {
-      display: inline-block;
-      padding: 5px 20px;
-      border: 1.5px solid #E0D8CC;
-      border-radius: 20px;
-      color: #B0A090;
-      font-weight: 500;
-    }
+    .hint-bar span { color: #D4A84C; font-weight: 600; }
 
-    /* ===== 场景列表 ===== */
+    /* ===== 场景卡片网格 ===== */
     .scene-section {
       padding: 4px 14px 8px;
     }
 
-    .scene-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .scene-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
     }
 
     .scene-card {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      gap: 4px;
       background: #fff;
-      border: 2px solid #E8E2DA;
-      border-radius: 14px;
-      padding: 18px 18px;
+      border: 1.5px solid #E8E2DA;
+      border-radius: 11px;
+      padding: 10px 8px 9px;
       cursor: pointer;
-      transition: all 0.22s ease;
+      transition: all 0.2s ease;
+      text-align: center;
+      min-height: 52px;
       -webkit-touch-callout: none;
       user-select: none;
-      position: relative;
     }
 
     .scene-card:active {
-      transform: scale(0.98);
+      transform: scale(0.96);
+      background: #FFFDF5;
+      border-color: #D4A84C;
+    }
+
+    @media (hover: hover) {
+      .scene-card:hover {
+        border-color: #C4B09A;
+        box-shadow: 0 2px 10px rgba(60,50,40,0.08);
+        transform: translateY(-1px);
+      }
     }
 
     .scene-card.selected {
@@ -138,345 +142,413 @@
       box-shadow: 0 2px 12px rgba(212,168,76,0.15);
     }
 
-    .scene-card.selected .scene-arrow {
-      color: #D4A84C;
-      transform: translateX(3px);
-    }
-
-    .scene-card-left {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .scene-text {
-      font-size: 15px;
-      font-weight: 600;
-      color: #3A3530;
-      line-height: 1.5;
-    }
-
-    .scene-arrow {
+    .scene-card-icon {
       font-size: 18px;
-      color: #C0B8A8;
-      margin-left: 12px;
+      line-height: 1;
       flex-shrink: 0;
-      transition: transform 0.2s ease, color 0.2s ease;
     }
 
-    /* ===== 提示条 ===== */
-    .hint-bar {
-      text-align: center;
-      padding: 10px 16px;
-      margin: 4px 16px;
-      font-size: 13px;
-      color: #A09080;
-    }
-    .hint-bar span { color: #D4A84C; font-weight: 600; }
-
-    /* ===== 表单卡片 ===== */
-    .form-section {
-      padding: 4px 14px 20px;
-    }
-
-    .form-card {
-      background: #fff;
-      border-radius: 18px;
-      padding: 28px 22px 24px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    }
-
-    .form-card h2 {
-      font-size: 19px;
-      font-weight: 700;
+    .scene-card-text {
+      font-size: 12px;
       color: #3A3530;
-      margin-bottom: 4px;
-      text-align: center;
+      font-weight: 600;
+      line-height: 1.4;
     }
 
-    .form-card-subtitle {
-      text-align: center;
-      font-size: 13px;
-      color: #B0A898;
-      margin-bottom: 20px;
+    /* ===== 表单区域 ===== */
+    .form-section {
+      margin: 4px 16px 24px;
+      background: #fff;
+      border-radius: 14px;
+      padding: 26px 20px;
+      box-shadow: 0 1px 8px rgba(60,50,40,0.06);
+      padding-bottom: max(26px, env(safe-area-inset-bottom, 26px));
     }
 
-    .form-group {
-      margin-bottom: 16px;
+    .form-header {
+      text-align: center;
+      margin-bottom: 22px;
     }
+
+    .form-header h2 {
+      font-size: 17px;
+      color: #3A3530;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .form-header p {
+      font-size: 12px;
+      color: #AAA499;
+      margin-top: 6px;
+    }
+
+    .form-group { margin-bottom: 18px; }
 
     .form-group label {
       display: block;
-      font-size: 14px;
-      font-weight: 600;
-      color: #5A544E;
-      margin-bottom: 8px;
+      font-size: 13px;
+      color: #77726A;
+      margin-bottom: 7px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
     }
 
-    .form-group label .required {
-      color: #D4544C;
-      margin-left: 2px;
-    }
-
-    .form-input {
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
       width: 100%;
-      padding: 14px 16px;
+      padding: 13px 15px;
       border: 1.5px solid #E5DED6;
       border-radius: 10px;
-      font-size: 15px;
+      font-size: 16px;
       color: #333;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
       outline: none;
+      font-family: inherit;
       background: #FAF8F5;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
       -webkit-appearance: none;
     }
 
-    .form-input:focus {
-      border-color: #D4A84C;
-      box-shadow: 0 0 0 3px rgba(212,168,76,0.1);
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: #C4B09A;
+      box-shadow: 0 0 0 3px rgba(196,176,154,0.12);
+      background: #fff;
     }
 
-    .form-input::placeholder {
-      color: #C0B8A8;
+    /* ===== 文本框 wrapper（承载边框样式 + 浮层引导）===== */
+    .textarea-wrapper {
+      position: relative;
+      padding: 13px 14px;
+      border: 1.5px solid #E5DED6;
+      border-radius: 10px;
+      background: #FAF8F5;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      min-height: 180px;
     }
 
-    textarea.form-input {
-      min-height: 100px;
-      resize: vertical;
+    .textarea-wrapper:focus-within {
+      border-color: #C4B09A;
+      box-shadow: 0 0 0 3px rgba(196,176,154,0.12);
+      background: #fff;
+    }
+
+    .textarea-wrapper textarea {
+      width: 100%;
+      min-height: 150px;
+      border: none;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      font-size: 16px;
+      color: #333;
       line-height: 1.6;
+      font-family: inherit;
+      resize: vertical;
+      outline: none;
+      display: block;
+      position: relative;
+      z-index: 2;
+      -webkit-appearance: none;
     }
 
-    /* ===== 提交按钮 ===== */
+    /* ===== 浮层引导提示 ===== */
+    .guide-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 13px 14px;
+      pointer-events: none;
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: #C4B09A;
+      background: transparent;
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 1;
+      transition: opacity 0.2s ease;
+    }
+    .guide-overlay.hidden { display: none; }
+
     .submit-btn {
       width: 100%;
       padding: 15px;
-      background: #3A3D4A;
+      background: linear-gradient(135deg, #3A3D4A 0%, #2D303B 100%);
       color: #D4A84C;
       border: none;
       border-radius: 12px;
       font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 6px;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.25s ease;
-      -webkit-touch-callout: none;
-      user-select: none;
+      transition: all 0.2s ease;
+      letter-spacing: 2px;
+      min-height: 50px;
+      -webkit-tap-highlight-color: transparent;
+      margin-top: 4px;
     }
 
     .submit-btn:active {
-      transform: translateY(1px);
-      background: #2D303B;
+      opacity: 0.85;
+      transform: scale(0.98);
+    }
+    .submit-btn:hover {
+      box-shadow: 0 4px 16px rgba(45,48,59,0.3);
     }
 
-    .submit-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    /* ===== Toast ===== */
+    /* Toast */
     .toast {
       position: fixed;
-      top: 50%;
+      top: max(20px, env(safe-area-inset-top, 20px));
       left: 50%;
-      transform: translate(-50%, -50%) scale(0.9);
-      background: rgba(45,48,59,0.92);
-      color: #fff;
-      padding: 14px 28px;
-      border-radius: 12px;
+      transform: translateX(-50%) translateY(-100px);
+      background: #fff;
+      padding: 12px 22px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
       font-size: 14px;
-      z-index: 9999;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.25s ease;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      text-align: center;
-      max-width: 80%;
-      line-height: 1.5;
+      z-index: 1000;
+      transition: transform 0.35s cubic-bezier(0.68,-0.55,0.265,1.55);
+      white-space: nowrap;
+      max-width: calc(100vw - 40px);
     }
-    .toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast.success { color: #52c41a; border-left: 4px solid #52c41a; }
+    .toast.error { color: #ff4d4f; border-left: 4px solid #ff4d4f; }
 
-    /* 底部安全区 */
-    .safe-bottom {
-      height: env(safe-area-inset-bottom);
+    /* 页脚 */
+    .footer {
+      text-align: center;
+      padding: 8px 20px max(20px, env(safe-area-inset-bottom, 20px));
+      color: #BBB5AA;
+      font-size: 11px;
+      letter-spacing: 0.5px;
     }
+
+    /* ===== 桌面端 ===== */
+    @media (min-width: 768px) {
+      .page-wrap { max-width: 520px; margin: 0 auto; }
+      .hero { margin: 24px auto 0; }
+      .hero-title { font-size: 28px; letter-spacing: 3px; }
+      .scene-grid { gap: 10px; }
+      .scene-card { padding: 12px 10px 11px; min-height: 58px; }
+      .scene-card-icon { font-size: 20px; }
+      .scene-card-text { font-size: 13px; }
+    }
+
+    /* ===== iPhone SE / 小屏 ===== */
+    @media (max-width: 374px) {
+      .hero { margin: 12px 10px 0; padding: 26px 18px 22px; }
+      .hero-title { font-size: 20px; letter-spacing: 1px; }
+      .hero-subtitle { font-size: 13px; }
+      .scene-section { padding: 2px 8px 6px; }
+      .scene-grid { gap: 6px; }
+      .scene-card { padding: 8px 6px 7px; min-height: 46px; border-radius: 9px; }
+      .scene-card-icon { font-size: 16px; }
+      .scene-card-text { font-size: 11px; }
+      .form-section { margin: 4px 10px 20px; padding: 22px 16px; }
+    }
+
+    /* ===== 大屏手机 ===== */
+    @media (min-width: 390px) and (max-width: 767px) {
+      .hero-title { font-size: 26px; letter-spacing: 2px; }
+    }
+
+    /* ===== 横屏 ===== */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero { margin: 8px 12px 0; padding: 22px 20px 18px; }
+      .hero-title { font-size: 18px; }
+      .hero-subtitle { display: none; }
+      .hint-bar { display: none; }
+      .scene-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+      .scene-card { padding: 7px 6px; min-height: 42px; border-radius: 8px; }
+      .scene-card-icon { font-size: 15px; }
+      .scene-card-text { font-size: 10.5px; }
+      .form-section { margin-bottom: 10px; padding: 18px 16px; }
+    }
+
+    input[type="text"], textarea, select { -webkit-appearance: none; }
   </style>
 </head>
 <body>
 
-  <!-- Hero 标题区 -->
-  <div class="hero">
-    <div class="hero-title">翻墙服务</div>
-    <div class="hero-subtitle">向专员描述您的翻墙需求，专员将为您推荐方案</div>
-  </div>
-
-  <!-- 应用场景 -->
-  <div class="section-label"><span>应用场景</span></div>
-
-  <div class="scene-section">
-    <div class="scene-list">
-      <div class="scene-card" data-question="需要体验ChatGPT、Gemini等境外AI服务">
-        <div class="scene-card-left">
-          <div class="scene-text">需要体验 ChatGPT、Gemini 等境外 AI</div>
-        </div>
-        <span class="scene-arrow">›</span>
-      </div>
-
-      <div class="scene-card" data-question="需要提交VFS境外签证申请">
-        <div class="scene-card-left">
-          <div class="scene-text">需要提交 VFS 境外签证申请</div>
-        </div>
-        <span class="scene-arrow">›</span>
-      </div>
-
-      <div class="scene-card" data-question="需要观看NETFLIX、HBO等境外流媒体内容">
-        <div class="scene-card-left">
-          <div class="scene-text">需要观看 NETFLIX、HBO 等境外流媒体</div>
-        </div>
-        <span class="scene-arrow">›</span>
-      </div>
-
-      <div class="scene-card" data-question="需要使用AppleTV等境外电视盒子">
-        <div class="scene-card-left">
-          <div class="scene-text">需要使用 AppleTV 等境外电视盒子</div>
-        </div>
-        <span class="scene-arrow">›</span>
-      </div>
-
-      <div class="scene-card" data-question="需要联机游玩境外游戏">
-        <div class="scene-card-left">
-          <div class="scene-text">需要联机游玩境外游戏</div>
-        </div>
-        <span class="scene-arrow">›</span>
-      </div>
-
-      <div class="scene-card" data-question="需要全屋翻墙，覆盖家中所有设备">
-        <div class="scene-card-left">
-          <div class="scene-text">需要全屋翻墙</div>
-        </div>
-        <span class="scene-arrow">›</span>
-      </div>
-
-      <div class="scene-card" data-question="需要在内地使用富途（Futu）进行证券交易">
-        <div class="scene-card-left">
-          <div class="scene-text">需要在内地用富途交易</div>
-        </div>
-        <span class="scene-arrow">›</span>
-      </div>
-
-      <!-- 其他兜底 -->
-      <div class="scene-card" data-question="" style="border-style: dashed; border-color: #D8D0C4;">
-        <div class="scene-card-left">
-          <div class="scene-text" style="color: #A09888;">其他翻墙需求（如未列出请补充）</div>
-        </div>
-        <span class="scene-arrow">›</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 点击提示 -->
-  <div class="hint-bar">点击上方卡片可<span>自动填入</span>表单</div>
-
-  <!-- 表单区 -->
-  <div class="form-section">
-    <div class="form-card">
-      <h2>提交需求</h2>
-      <div class="form-card-subtitle">专员将在收到后尽快联系您</div>
-      <form id="applyForm">
-
-        <div class="form-group">
-          <label>您的企业微信英文名<span class="required">*</span></label>
-          <input type="text" class="form-input" id="weworkName" placeholder="例：patfootliu" autocomplete="off">
-        </div>
-
-        <div class="form-group">
-          <label>请描述您的需求或遇到的问题<span class="required">*</span></label>
-          <textarea class="form-input" id="description" placeholder="例如：需要在家用 AppleTV 看 NETFLIX，希望推荐合适的翻墙方案..."></textarea>
-        </div>
-
-        <button type="submit" class="submit-btn">提 交</button>
-      </form>
-    </div>
-  </div>
-
-  <div class="safe-bottom"></div>
-
-  <!-- Toast -->
   <div class="toast" id="toast"></div>
+
+  <div class="page-wrap">
+
+    <!-- Hero 标题区 -->
+    <section class="hero">
+      <div class="hero-title">翻墙服务</div>
+      <div class="hero-subtitle">向专员描述您的需求，专员将为您推荐方案</div>
+    </section>
+
+    <!-- 提示 -->
+    <div class="hint-bar">点击下方常见场景，或<span>直接描述您的需求</span></div>
+
+    <!-- 场景列表 -->
+    <section class="scene-section">
+      <div class="scene-grid">
+        <div class="scene-card" data-question="需要体验ChatGPT、Gemini等境外AI服务" data-placeholder="例如：主要想用___（ChatGPT/Gemini/Claude等），用途是___（写代码/翻译/查资料）|例如：希望推荐稳定且速度快的节点，预算约___元/月|例如：之前用过___（机场/VPN），但___（速度慢/不稳定/被墙了）">
+          <span class="scene-card-icon">🤖</span>
+          <span class="scene-card-text">境外 AI 服务</span>
+        </div>
+        <div class="scene-card" data-question="需要提交VFS境外签证申请" data-placeholder="例如：需要申请___国家签证，使用___浏览器访问 VFS 官网|例如：打开页面一直加载不出来/无法上传资料/支付卡被拒|例如：预约时间在___月___日，急需解决">
+          <span class="scene-card-icon">📋</span>
+          <span class="scene-card-text">VFS 签证申请</span>
+        </div>
+        <div class="scene-card" data-question="需要观看NETFLIX、HBO等境外流媒体内容" data-placeholder="例如：想看___（NETFLIX/HBO/Disney+/YouTube Premium）的内容|例如：设备是___（电视/投影/iPad/电脑），家里网络是___宽带|例如：希望画质流畅能看 4K，对延迟要求不高">
+          <span class="scene-card-icon">🎬</span>
+          <span class="scene-card-text">境外流媒体</span>
+        </div>
+        <div class="scene-card" data-question="需要使用AppleTV等境外电视盒子" data-placeholder="例如：已有 AppleTV 设备，型号___|例如：想安装___（美区/港区/台区）的 App，但账号切换有问题|例如：希望实现全屋覆盖，客厅+卧室都能用">
+          <span class="scene-card-icon">📺</span>
+          <span class="scene-card-text">AppleTV 盒子</span>
+        </div>
+        <div class="scene-card" data-question="需要联机游玩境外游戏" data-placeholder="例如：主要玩___（Steam/Epic/PSN/Xbox/任天堂）的___游戏|例如：联机延迟高/无法连接服务器/商店无法购买游戏|例如：希望低延迟方案，能接受___元/月的费用">
+          <span class="scene-card-icon">🎮</span>
+          <span class="scene-card-text">境外游戏联机</span>
+        </div>
+        <div class="scene-card" data-question="需要全屋翻墙，覆盖家中所有设备" data-placeholder="例如：家里有___个设备（手机/平板/电脑/电视等）需要同时上网|例如：目前用的是___路由器，品牌型号___|例如：希望一次配置好，所有设备自动走代理，不需要每个都设置">
+          <span class="scene-card-icon">🏠</span>
+          <span class="scene-card-text">全屋翻墙</span>
+        </div>
+        <div class="scene-card" data-question="需要在内地使用富途（Futu）进行证券交易" data-placeholder="例如：富途账号已开通，主要交易___（港股/美股/ETF）|例如：行情刷新慢/下单延迟高/经常断线|例如：交易时间在___（盘前/盘中/盘后），对稳定性要求很高">
+          <span class="scene-card-icon">📈</span>
+          <span class="scene-card-text">富途证券交易</span>
+        </div>
+        <!-- 其他兜底 -->
+        <div class="scene-card" data-question="" data-placeholder="" style="border-style: dashed; opacity: 0.55;">
+          <span class="scene-card-icon">➕</span>
+          <span class="scene-card-text" style="color: #999;">其他需求</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 分隔线 -->
+    <div style="height: 1px; background: linear-gradient(90deg, transparent, rgba(196,176,154,0.3), transparent); margin: 16px 24px 12px;"></div>
+
+    <!-- 表单 -->
+    <section class="form-section" id="formSection">
+      <div class="form-header">
+        <h2>提交需求</h2>
+        <p>专员将在收到后尽快联系您</p>
+      </div>
+      <form id="applyForm">
+        <div class="form-group">
+          <label for="description">描述您的需求 *</label>
+          <div class="textarea-wrapper">
+            <textarea id="description" name="description" placeholder="点击上方场景卡片，或直接输入您的需求..." required></textarea>
+            <div class="guide-overlay hidden" id="guideOverlay"></div>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">通知专员</button>
+      </form>
+    </section>
+
+    <footer class="footer">
+      8000VIP 服务 · 您的 24 小时 IT 私人助理
+    </footer>
+
+  </div>
 
   <script>
     const SCF_FUNCTION_URL = 'https://1257899736-k5tegb176f.ap-guangzhou.tencentscf.com';
     const WEBHOOK_KEY = '7f867fed-8b0c-4494-a049-e4b734c9f55b';
 
-    let selectedQuestion = null;
+    let selectedQuestion = '';
 
-    // 场景卡片点击
+    // 浮层引导相关
+    const descField = document.getElementById('description');
+    const guideOverlay = document.getElementById('guideOverlay');
+    const nativePlaceholder = descField.placeholder;
+
+    descField.addEventListener('focus', () => {
+      guideOverlay.classList.add('hidden');
+      descField.placeholder = nativePlaceholder;
+    });
+    descField.addEventListener('input', () => {
+      guideOverlay.classList.add('hidden');
+      descField.placeholder = nativePlaceholder;
+    });
+    descField.addEventListener('blur', () => {
+      if (!descField.value.trim()) {
+        guideOverlay.classList.remove('hidden');
+        if (!guideOverlay.classList.contains('hidden')) {
+          descField.placeholder = '';
+        }
+      }
+    });
+
+    // 场景卡片点击 → 显示浮层引导
     document.querySelectorAll('.scene-card').forEach(card => {
       card.addEventListener('click', () => {
-        // 取消其他选中
-        document.querySelectorAll('.scene-card').forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-
         const q = card.dataset.question;
+        const placeholder = card.dataset.placeholder || '';
+        if (!q) return;
 
-        if (q) {
-          selectedQuestion = q;
-          // 去掉末尾问号/句号
-          const cleanText = q.replace(/[？?。]+$/, '');
-          document.getElementById('description').value = cleanText + '\n\n';
-        } else {
-          selectedQuestion = null;
-          document.getElementById('description').value = '';
-        }
+        selectedQuestion = q;
 
-        // 滚动到表单
-        setTimeout(() => {
-          document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-          document.getElementById('description').focus();
-        }, 200);
+        // 高亮当前选中的
+        document.querySelectorAll('.scene-card').forEach(c => {
+          c.style.borderColor = '';
+          c.style.background = '';
+        });
+        card.style.borderColor = '#D4A84C';
+        card.style.background = '#FFFDF5';
+
+        // 浮层显示：标题 + 引导提示词
+        const guideHtml = (placeholder || '').replace(/\|/g, '<br>');
+        guideOverlay.innerHTML = '<strong style="color:#D4A84C;">' + q + '</strong><br><br>' + guideHtml;
+        guideOverlay.classList.remove('hidden');
+
+        // 清空原生 placeholder 避免重叠
+        descField.placeholder = '';
+
+        // 清空已有内容
+        descField.value = '';
+
+        // 平滑滚动到表单
+        document.getElementById('formSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     });
 
     // Toast
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2200);
+    function showToast(msg, type = 'success') {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.className = 'toast ' + type + ' show';
+      setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
     // 表单提交
     document.getElementById('applyForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const desc = descField.value.trim();
 
-      const name = document.getElementById('weworkName').value.trim();
-      const desc = document.getElementById('description').value.trim();
-
-      if (!name) {
-        showToast('请输入您的企业微信英文名');
+      if (!desc || desc.length < 3) {
+        showToast('请描述您的需求', 'error');
         return;
       }
 
-      if (!desc) {
-        showToast('请描述您的翻墙需求');
-        return;
-      }
-
-      const btn = e.target.querySelector('.submit-btn');
       btn.disabled = true;
-      btn.textContent = '提交中...';
+      btn.textContent = '通知中...';
 
       try {
         const timeStr = new Date().toLocaleString('zh-CN');
         const questionLine = selectedQuestion ? '\n> **选中场景：**' + selectedQuestion.replace(/[？?。]+$/, '') : '';
+
         const message = {
           msgtype: 'markdown',
           markdown: {
             content:
               '**🌐 翻墙服务新需求**\n\n' +
-              '> **称呼：**' + name + '\n' +
-              questionLine +
-              '\n> **需求描述：**\n' + desc + '\n' +
-              '> **时间：**' + timeStr + '\n\n---\n' +
+              '> **需求描述：**\n> ' + desc.replace(/\n/g, '\n> ') + (selectedQuestion ? '\n> \n> **选中场景：**' + selectedQuestion.replace(/[？?。]+$/, '') : '') + '\n' +
+              '> **时间：**' + timeStr + '\n\n' +
+              '---\n' +
               '<font color="info">8000VIP 翻墙服务</font>'
           }
         };
@@ -488,20 +560,26 @@
         });
 
         const result = await resp.json();
-        if (result.errcode === 0) {
+
+        if (result.errcode === 0 || result.errno === 0) {
           showToast('✅ 提交成功！专员会尽快联系您');
           document.getElementById('applyForm').reset();
-          selectedQuestion = null;
-          document.querySelectorAll('.scene-card').forEach(c => c.classList.remove('selected'));
+          descField.placeholder = nativePlaceholder;
+          guideOverlay.classList.add('hidden');
+          selectedQuestion = '';
+          document.querySelectorAll('.scene-card').forEach(c => {
+            c.style.borderColor = '';
+            c.style.background = '';
+          });
         } else {
-          showToast('提交失败：' + (result.errmsg || '未知错误'));
+          showToast(result.errmsg || '提交失败，请稍后重试', 'error');
         }
       } catch (err) {
         console.error(err);
-        showToast('❌ 提交失败，请稍后重试');
+        showToast('网络错误，请检查连接后重试', 'error');
       } finally {
         btn.disabled = false;
-        btn.textContent = '提交';
+        btn.textContent = '通知专员';
       }
     });
   </script>
